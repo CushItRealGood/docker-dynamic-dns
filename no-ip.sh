@@ -19,7 +19,7 @@ do
 		echo "No user was set for "USER$COUNTER"."
 		exit 41 #disabled for now to make testing easier
 	else
-		eval echo \$$(echo "USER$COUNTER") set as USER$COUNTER
+		eval echo USER$COUNTER has been set
 	fi
 done
 
@@ -30,7 +30,7 @@ do
 		echo "No password was set for "PASSWORD$COUNTER"."
 		exit 42 #disabled for now to make testing easier
 	else
-		eval echo \$$(echo "PASSWORD$COUNTER") set as PASSWORD$COUNTER
+		eval echo PASSWORD$COUNTER has been set
 	fi
 done
 
@@ -170,7 +170,7 @@ else
 			else
 				#eval echo NOIPURL$COUNTER=https\://\$$(echo "USER$COUNTER\:\$$(echo PASSWORD$COUNTER)@$SERVICEURL")'\?'hostname=\$$(echo "HOSTNAME$COUNTER")'\&'myip=\$$(echo "IP") #show the variables getting set
 				eval NOIPURL$COUNTER=https\://\$$(echo "USER$COUNTER\:\$$(echo PASSWORD$COUNTER)@$SERVICEURL")'\?'hostname=\$$(echo "HOSTNAME$COUNTER")'\&'myip=\$$(echo "IP") #set NOIPURLs
-				eval echo RESULT$COUNTER='\$\('wget --no-check-certificate -qO- \$$(echo "NOIPURL$COUNTER")'\)'
+				#eval echo RESULT$COUNTER='\$\('wget --no-check-certificate -qO- \$$(echo "NOIPURL$COUNTER")'\)' #removed to prevent passing plain text passwords to log
 				eval wget --no-check-certificate -qO- \$$(echo "NOIPURL$COUNTER")
 			fi
 		done
