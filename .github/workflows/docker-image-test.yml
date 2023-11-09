@@ -1,8 +1,6 @@
 name: Docker Image CI Test
 
 on:
-  schedule:
-    - cron: '0 0 1 * *'
   push:
     branches: [ "test" ]
   pull_request:
