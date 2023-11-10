@@ -5,9 +5,6 @@ on:
     branches: [ "test" ]
   pull_request:
     branches: [ "test" ]
-
-env:
-  REPO_NAME: ${{secrets.REPO_NAME}}
   
 jobs:
 
@@ -34,6 +31,6 @@ jobs:
     - name: build the image
       run: |
         docker buildx build --push \
-          --tag $DOCKER_USER/$REPO_NAME:test \
-          --tag $DOCKER_USER/$REPO_NAME:test-${{ steps.date.outputs.date }} \
+          --tag ${{ secrets.DOCKER_USER }}/${{secrets.REPO_NAME}}:test \
+          --tag ${{ secrets.DOCKER_USER }}/${{secrets.REPO_NAME}}:test-${{ steps.date.outputs.date }} \
           --platform linux/amd64,linux/arm/v7,linux/arm64 .

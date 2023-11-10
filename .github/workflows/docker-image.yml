@@ -5,9 +5,6 @@ on:
     - cron: '0 0 1 * *'
   push:
     branches: [ "master" ]
-
-env:
-  REPO_NAME: ${{secrets.REPO_NAME}}
   
 jobs:
 
@@ -34,6 +31,6 @@ jobs:
     - name: build the image
       run: |
         docker buildx build --push \
-          --tag $DOCKER_USER/$REPO_NAME:latest \
-          --tag $DOCKER_USER/$REPO_NAME:master-${{ steps.date.outputs.date }} \
+          --tag ${{ secrets.DOCKER_USER }}/${{secrets.REPO_NAME}}:latest \
+          --tag ${{ secrets.DOCKER_USER }}/${{secrets.REPO_NAME}}:master-${{ steps.date.outputs.date }} \
           --platform linux/amd64,linux/arm/v7,linux/arm64 .
