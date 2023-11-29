@@ -36,11 +36,12 @@ jobs:
 
     - name: test the image
       run: |
-        docker run --name ddns -e USER1=test -e PASSWORD1=test -e HOSTNAME1=test.merseine.nu -e DETECTIP=1 -e INTERVAL=1 -e SERVICE=dyndns -e DOMAINS=1 --restart unless-stopped cush/docker-dynamic-dns:test
-        
-    - name: build the image
-      run: |
-        docker buildx build --push \
-          --tag ${{ secrets.DOCKER_USER }}/${{secrets.REPO_NAME}}:test \
-          --tag ${{ secrets.DOCKER_USER }}/${{secrets.REPO_NAME}}:test-${{ steps.date.outputs.date }} \
-          --platform linux/amd64,linux/arm64 .
+        docker run --name ddns -e USER1=test -e PASSWORD1=test -e HOSTNAME1=test.merseine.nu -e DETECTIP=1 -e INTERVAL=0 -e SERVICE=dyndns -e DOMAINS=1 --restart unless-stopped cush/docker-dynamic-dns:test
+
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: ${{ secrets.DOCKER_USER }}/${{secrets.REPO_NAME}}:test
