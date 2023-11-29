@@ -27,6 +27,16 @@ jobs:
     - name: install buildx
       id: buildx
       uses: docker/setup-buildx-action@master
+
+    - name: Build and export to Docker
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        load: true
+
+    - name: test the image
+      run: |
+        docker run --name ddns -e USER1=test -e PASSWORD1=test -e HOSTNAME1=test.merseine.nu -e DETECTIP=1 -e INTERVAL=1 -e SERVICE=dyndns -e DOMAINS=1 --restart unless-stopped cush/docker-dynamic-dns:test
         
     - name: build the image
       run: |
