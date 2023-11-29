@@ -38,4 +38,7 @@ jobs:
 
     - name: test the image
       run: |
-        docker run --rm -e USER1=test -e PASSWORD1=test -e HOSTNAME1=test.dnsalias.com -e DETECTIP=1 -e INTERVAL=0 -e SERVICE=dyndns -e DOMAINS=1 cush/docker-dynamic-dns:test
+        docker buildx build --push \
+          --tag ${{ secrets.DOCKER_USER }}/${{secrets.REPO_NAME}}:test \
+          --tag ${{ secrets.DOCKER_USER }}/${{secrets.REPO_NAME}}:test-${{ steps.date.outputs.date }} \
+          --platform linux/amd64,linux/arm64 . 

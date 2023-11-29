@@ -118,18 +118,13 @@ if [ -z "$DOMAINS" ]; then
 
 		RESULT=$(wget --no-check-certificate -qO- $AUTHHEADER $USERAGENT $NOIPURL)
 
-		if [ "$RESULT" != 'good' ] && [ "$RESULT" != 'nochg' ]; then
-			echo "DNS update issues encountered."
-			exit 1
-		fi
+		echo $RESULT
 
-		echo "$RESULT"
-
-		if [[ $INTERVAL -eq 0 ]]; then
+		if [ $INTERVAL -eq 0 ]; then
 			break
 		else
 			sleep "${INTERVAL}m"
-			if [[ -n $IP ]]; then
+			if [ -n $IP ]; then
 				IP=$(wget -qO- "http://myexternalip.com/raw")
 			fi
 		fi
@@ -152,11 +147,11 @@ else
 				#eval echo is the status of \$$(echo "HOSTNAME$COUNTER")
 			fi
 		done
-		if [[ $INTERVAL -eq 0 ]]; then
+		if [ $INTERVAL -eq 0 ]; then
 			break
 		else
 			sleep "${INTERVAL}m"
-			if [[ -n $IP ]]; then
+			if [ -n $IP ]; then
 				IP=$(wget -qO- "http://myexternalip.com/raw")
 			fi
 		fi
