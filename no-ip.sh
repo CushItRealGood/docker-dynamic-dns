@@ -120,7 +120,7 @@ if [ -z "$DOMAINS" ]; then
 
 		echo "$RESULT"
 
-		if [ $RESULT != "good" ] $$ [ $RESULT != "nochg" ]; then
+		if [ $RESULT != 'good' ] && [ $RESULT != 'nochg' ]; then
 			echo "DNS update issues encountered."
 			exit 1
 		fi
