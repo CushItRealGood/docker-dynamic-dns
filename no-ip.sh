@@ -118,12 +118,7 @@ if [ -z "$DOMAINS" ]; then
 
 		RESULT=$(wget --no-check-certificate -qO- $AUTHHEADER $USERAGENT $NOIPURL)
 
-		if [ "$RESULT" != 'good' ]; then
-			echo "DNS update issues encountered."
-			exit 1
-		fi
-		
-		if [ "$RESULT" != 'nochg' ]; then
+		if [ "$RESULT" != 'good' ] && [ "$RESULT" != 'nochg' ]; then
 			echo "DNS update issues encountered."
 			exit 1
 		fi
