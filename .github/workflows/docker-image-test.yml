@@ -36,7 +36,7 @@ jobs:
 
     - name: test the image
       run: |
-        docker run --name ddns -e USER1=test -e PASSWORD1=test -e HOSTNAME1=test.merseine.nu -e DETECTIP=1 -e INTERVAL=0 -e SERVICE=dyndns -e DOMAINS=1 --restart unless-stopped cush/docker-dynamic-dns:test
+        docker run --name ddns -e USER1=test -e PASSWORD1=test -e HOSTNAME1=test.merseine.nu -e DETECTIP=1 -e INTERVAL=0 -e SERVICE=dyndns -e DOMAINS=1 --restart unless-stopped
 
     - name: Build and push
       uses: docker/build-push-action@v5
