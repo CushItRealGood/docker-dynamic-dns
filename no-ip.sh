@@ -120,9 +120,9 @@ if [ -z "$DOMAINS" ]; then
 
 		echo "$RESULT"
 
-		if [[ $RESULT = "dnserr" ]]; then
+		if [[ $RESULT != "good" $$ $RESULT != "nochg" ]]; then
 			echo "DNS Error Encountered"
-			exit 35
+			exit 1
 		fi
 
 		if [[ $INTERVAL -eq 0 ]]; then
