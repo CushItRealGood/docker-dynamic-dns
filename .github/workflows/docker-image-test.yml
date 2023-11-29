@@ -28,16 +28,6 @@ jobs:
       id: buildx
       uses: docker/setup-buildx-action@master
 
-    - name: Build and export to Docker
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        load: true
-
-    - name: test the image
-      run: |
-        docker run --name ddns -e USER1=test -e PASSWORD1=test -e HOSTNAME1=test.merseine.nu -e DETECTIP=1 -e INTERVAL=0 -e SERVICE=dyndns -e DOMAINS=1 --restart unless-stopped
-
     - name: Build and push
       uses: docker/build-push-action@v5
       with:
@@ -45,3 +35,7 @@ jobs:
         platforms: linux/amd64,linux/arm64
         push: true
         tags: ${{ secrets.DOCKER_USER }}/${{secrets.REPO_NAME}}:test
+
+    - name: test the image
+      run: |
+        docker run --rm -e USER1=test -e PASSWORD1=test -e HOSTNAME1=test.merseine.nu -e DETECTIP=1 -e INTERVAL=0 -e SERVICE=dyndns -e DOMAINS=1
