@@ -38,4 +38,4 @@ jobs:
 
     - name: test the image
       run: |
-        docker run --rm -e USER1=test -e PASSWORD1=test -e HOSTNAME1=test.merseine.nu -e DETECTIP=1 -e INTERVAL=0 -e SERVICE=dyndns -e DOMAINS=1
+        docker run --rm -e USER1=test -e PASSWORD1=test -e HOSTNAME1=test.merseine.nu -e DETECTIP=1 -e INTERVAL=0 -e SERVICE=dyndns -e DOMAINS=1 cush/docker-dynamic-dns:test
