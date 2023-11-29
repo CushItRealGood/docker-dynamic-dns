@@ -28,15 +28,7 @@ jobs:
       id: buildx
       uses: docker/setup-buildx-action@master
 
-    - name: Build and push
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        platforms: linux/amd64,linux/arm64
-        push: true
-        tags: ${{ secrets.DOCKER_USER }}/${{secrets.REPO_NAME}}:test
-
-    - name: test the image
+    - name: build and push the image
       run: |
         docker buildx build --push \
           --tag ${{ secrets.DOCKER_USER }}/${{secrets.REPO_NAME}}:test \
